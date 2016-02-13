@@ -17,7 +17,7 @@ class Weekdays extends Component {
     return (
       <View style={styles.container}>
         <Text>Days of the week:</Text>
-        <DayItem />
+        <DayItem day={DAYS[0]} />
       </View>
     )
   }
