@@ -3,6 +3,7 @@
 import React, {
   Text,
   View,
+  ListView,
   StyleSheet,
   AppRegistry,
   TouchableHighlight
@@ -16,6 +17,7 @@ const StopWatch = React.createClass({
       timeElapsed: null,
       running: false,
       startTime: null,
+      lapsDs: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       laps: []
     };
   },
@@ -33,9 +35,9 @@ const StopWatch = React.createClass({
             {this.lapButton()}
           </View>
         </View>
-        <View style={styles.footer}>
-          {this.laps()}
-        </View>
+        <ListView style={styles.footer}
+          dataSource={this.state.lapsDs}
+          renderRow={this.renderLap}/>
       </View>
     );
   },
@@ -66,6 +68,7 @@ const StopWatch = React.createClass({
     } else {
       this.setState({
         startTime: new Date(),
+        lapsDs: this.state.lapsDs.cloneWithRows([]),
         laps: []
       });
 
@@ -79,22 +82,24 @@ const StopWatch = React.createClass({
   },
   handleLapPress: function() {
     let lap = this.state.timeElapsed;
+    let newLaps = this.state.laps.concat([lap]);
     this.setState({
       startTime: new Date(),
-      laps: this.state.laps.concat([lap])
+      lapsDs: this.state.lapsDs.cloneWithRows(newLaps),
+      laps: newLaps
     });
   },
-  laps: function() {
-    return this.state.laps.map((lap, index) => (
-      <View key={index} style={styles.lap}>
+  renderLap: function(lap, sectionId, rowId, highlightRow) {
+    return (
+      <View key={rowId} style={styles.lap}>
         <Text style={styles.lapText}>
-          Lap #{index + 1}
+          Lap #{parseInt(rowId) + 1}
         </Text>
         <Text style={styles.lapText}>
           {formatTime(lap)}
         </Text>
       </View>
-    ))
+    );
   }
 });
 
