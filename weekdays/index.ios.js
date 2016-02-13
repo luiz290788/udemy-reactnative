@@ -21,6 +21,10 @@ class Weekdays extends Component {
       </View>
     )
   }
+
+  days() {
+    
+  }
 }
 
 const styles = StyleSheet.create({
