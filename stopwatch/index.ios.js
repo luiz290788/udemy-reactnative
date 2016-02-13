@@ -14,7 +14,9 @@ const StopWatch = React.createClass({
   getInitialState: function() {
     return {
       timeElapsed: null,
-      running: false
+      running: false,
+      startTime: null,
+      laps: []
     };
   },
   render: function() {
@@ -48,7 +50,8 @@ const StopWatch = React.createClass({
   },
   lapButton: function() {
     return (
-      <TouchableHighlight style={styles.button}>
+      <TouchableHighlight underlayColor='gray' style={styles.button}
+        onPress={this.handleLapPress}>
         <Text>Lap</Text>
       </TouchableHighlight>
     );
@@ -58,18 +61,27 @@ const StopWatch = React.createClass({
       clearInterval(this.interval);
       this.setState({
         running: false,
-        timeElapsed: null
+        timeElapsed: null,
+        laps: []
       });
     } else {
-      let startTime = new Date();
+      this.setState({
+        startTime: new Date()
+      });
 
       this.interval = setInterval(() => {
         this.setState({
           running: true,
-          timeElapsed: new Date() - startTime
+          timeElapsed: new Date() - this.state.startTime
         });
       }, 30);
     }
+  },
+  handleLapPress: function() {
+    let lap = this.state.timeElapsed;
+    this.setState({
+      startTime: new Date()
+    });
   }
 });
 
