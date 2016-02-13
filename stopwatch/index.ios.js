@@ -8,8 +8,10 @@ import React, {
   TouchableHighlight
 } from 'react-native';
 
+import formatTime from 'minutes-seconds-milliseconds';
+
 const StopWatch = React.createClass({
-  getInitialState: funciton() {
+  getInitialState: function() {
     return {
       timeElapsed: null
     };
@@ -19,7 +21,7 @@ const StopWatch = React.createClass({
       <View style={styles.container}>
         <View style={[styles.header, this.border('yellow')]}>
           <View style={[styles.timerWrapper, this.border('red')]}>
-            <Text>00:00:00</Text>
+            <Text>{formatTime(this.state.timeElapsed)}</Text>
           </View>
           <View style={[styles.buttonWrapper, this.border('green')]}>
             {this.startStopButton()}
@@ -48,9 +50,12 @@ const StopWatch = React.createClass({
   },
   handleStartPress: function() {
     let startTime = new Date();
-    this.setState({
-      timeElapsed: new Date() - startTime
-    });
+
+    setInterval(() => {
+      this.setState({
+        timeElapsed: new Date() - startTime
+      });
+    }, 30);
   },
   border: function(color) {
     return {
