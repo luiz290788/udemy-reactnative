@@ -19,16 +19,18 @@ const StopWatch = React.createClass({
   render: function() {
     return (
       <View style={styles.container}>
-        <View style={[styles.header, this.border('yellow')]}>
-          <View style={[styles.timerWrapper, this.border('red')]}>
-            <Text>{formatTime(this.state.timeElapsed)}</Text>
+        <View style={styles.header}>
+          <View style={styles.timerWrapper}>
+            <Text style={styles.timer}>
+              {formatTime(this.state.timeElapsed)}
+            </Text>
           </View>
-          <View style={[styles.buttonWrapper, this.border('green')]}>
+          <View style={styles.buttonWrapper}>
             {this.startStopButton()}
             {this.lapButton()}
           </View>
         </View>
-        <View style={[styles.footer, this.border('blue')]}>
+        <View style={styles.footer}>
           <Text>I am a list of laps</Text>
         </View>
       </View>
@@ -36,14 +38,15 @@ const StopWatch = React.createClass({
   },
   startStopButton: function() {
     return (
-      <TouchableHighlight underlayColor='gray' onPress={this.handleStartPress}>
+      <TouchableHighlight underlayColor='gray' onPress={this.handleStartPress}
+        style={[styles.button, styles.startButton]}>
         <Text>Start</Text>
       </TouchableHighlight>
     );
   },
   lapButton: function() {
     return (
-      <TouchableHighlight>
+      <TouchableHighlight style={styles.button}>
         <Text>Lap</Text>
       </TouchableHighlight>
     );
@@ -56,12 +59,6 @@ const StopWatch = React.createClass({
         timeElapsed: new Date() - startTime
       });
     }, 30);
-  },
-  border: function(color) {
-    return {
-      borderColor: color,
-      borderWidth: 4
-    };
   }
 });
 
@@ -82,11 +79,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  timer: {
+    fontSize: 60
+  },
   buttonWrapper: {
     flex: 3,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around'
+  },
+  button: {
+    borderWidth: 2,
+    height: 100,
+    width: 100,
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  startButton: {
+    borderColor: '#00CC00'
   }
 });
 
