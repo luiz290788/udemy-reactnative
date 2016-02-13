@@ -11,16 +11,16 @@ const StopWatch = React.createClass({
   render: function() {
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
-          <View>
+        <View style={[styles.header, this.border('yellow')]}>
+          <View style={this.border('red')}>
             <Text>00:00:00</Text>
           </View>
-          <View>
+          <View style={this.border('green')}>
             {this.startStopButton()}
             {this.lapButton()}
           </View>
         </View>
-        <View style={styles.footer}>
+        <View style={[styles.footer, this.border('blue')]}>
           <Text>I am a list of laps</Text>
         </View>
       </View>
@@ -39,6 +39,12 @@ const StopWatch = React.createClass({
         <Text>Lap</Text>
       </View>
     );
+  },
+  border: function(color) {
+    return {
+      borderColor: color,
+      borderWidth: 4
+    };
   }
 });
 
@@ -48,18 +54,10 @@ const styles = StyleSheet.create({
     alignItems: 'stretch'
   },
   header: {
-    flex: 1,
-    backgroundColor: 'yellow'
+    flex: 1
   },
   footer: {
-    flex: 1,
-    backgroundColor: 'blue'
-  },
-  timer: {
-    backgroundColor: 'red'
-  },
-  buttons: {
-    backgroundColor: 'green'
+    flex: 1
   }
 });
 
