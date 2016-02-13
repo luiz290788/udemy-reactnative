@@ -17,13 +17,13 @@ class Weekdays extends Component {
     return (
       <View style={styles.container}>
         <Text>Days of the week:</Text>
-        <DayItem day={DAYS[0]} />
+        {this.days()}
       </View>
     )
   }
 
   days() {
-    
+    return DAYS.map(weekday => <DayItem key={weekday.toLowerCase()} day={weekday}/>);
   }
 }
 
