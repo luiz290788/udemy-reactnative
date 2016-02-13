@@ -8,11 +8,14 @@ import React, {
   StyleSheet
 } from 'react-native';
 
+const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
 class Weekdays extends Component {
   render() {
     return (
       <View style={styles.container}>
         <Text>Days of the week:</Text>
+        
       </View>
     )
   }
