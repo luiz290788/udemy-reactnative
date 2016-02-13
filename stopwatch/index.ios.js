@@ -13,7 +13,8 @@ import formatTime from 'minutes-seconds-milliseconds';
 const StopWatch = React.createClass({
   getInitialState: function() {
     return {
-      timeElapsed: null
+      timeElapsed: null,
+      running: false
     };
   },
   render: function() {
@@ -37,10 +38,11 @@ const StopWatch = React.createClass({
     );
   },
   startStopButton: function() {
+    let style = this.state.running ? styles.stopButton : styles.startButton;
     return (
       <TouchableHighlight underlayColor='gray' onPress={this.handleStartPress}
-        style={[styles.button, styles.startButton]}>
-        <Text>Start</Text>
+        style={[styles.button, style]}>
+        <Text>{this.state.running ? 'Stop' : 'Start'}</Text>
       </TouchableHighlight>
     );
   },
@@ -52,13 +54,22 @@ const StopWatch = React.createClass({
     );
   },
   handleStartPress: function() {
-    let startTime = new Date();
-
-    setInterval(() => {
+    if (this.state.running) {
+      clearInterval(this.interval);
       this.setState({
-        timeElapsed: new Date() - startTime
+        running: false,
+        timeElapsed: null
       });
-    }, 30);
+    } else {
+      let startTime = new Date();
+
+      this.interval = setInterval(() => {
+        this.setState({
+          running: true,
+          timeElapsed: new Date() - startTime
+        });
+      }, 30);
+    }
   }
 });
 
@@ -98,6 +109,9 @@ const styles = StyleSheet.create({
   },
   startButton: {
     borderColor: '#00CC00'
+  },
+  stopButton: {
+    borderColor: '#CC0000'
   }
 });
 
