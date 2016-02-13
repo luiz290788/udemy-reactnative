@@ -11,8 +11,6 @@ import React, {
 import DayItem from './src/day-item'
 import Moment from 'moment';
 
-const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
 class Weekdays extends Component {
   render() {
     return (
@@ -23,7 +21,13 @@ class Weekdays extends Component {
   }
 
   days() {
-    return DAYS.map(weekday => <DayItem key={weekday.toLowerCase()} day={weekday}/>);
+    var daysItems = [];
+    for (var i = 0; i < 7; i++) {
+      let day = Moment().add(i, 'days');
+      let weekday = day.format('dddd');
+      daysItems.push(<DayItem key={weekday.toLowerCase()} day={weekday} daysUntil={i}/>)
+    }
+    return daysItems;
   }
 }
 
