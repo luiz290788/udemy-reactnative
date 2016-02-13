@@ -6,15 +6,19 @@ import React, {
   Text
 } from 'react-native';
 
-class DayItem extends Component {
+export default class DayItem extends Component {
   render() {
     return (
-      <Text>
+      <Text style={styles.day}>
         A day of the week
       </Text>
     )
   }
 }
 
-
-AppRegistry.registerComponent('DayItem', () => DayItem);
+const styles = StyleSheet.create({
+  day: {
+    fontSize: 18,
+    color: '#000FFF'
+  }
+});
