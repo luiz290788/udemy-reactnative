@@ -9,6 +9,7 @@ import React, {
 } from 'react-native';
 
 import DayItem from './src/day-item'
+import Moment from 'moment';
 
 const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
@@ -16,7 +17,6 @@ class Weekdays extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Days of the week:</Text>
         {this.days()}
       </View>
     )
