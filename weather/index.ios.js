@@ -7,7 +7,7 @@ import React, {
   MapView
 } from 'react-native';
 
-import OpenWeather from './src/api.js';
+import openWeather from './src/api.js';
 
 const Weather = React.createClass({
   getInitialState: function() {
@@ -15,7 +15,10 @@ const Weather = React.createClass({
       pin: {
         latitude: 0,
         longitude: 0
-      }
+      },
+      city: '',
+      temperature: '',
+      description: ''
     };
   },
   render: function() {
@@ -32,6 +35,11 @@ const Weather = React.createClass({
         latitude: region.latitude,
         longitude: region.longitude
       }
+    });
+
+    openWeather(region.latitude, region.longitude).then(data => {
+      console.log(data);
+      this.setState(data);
     });
   }
 });
