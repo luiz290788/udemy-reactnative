@@ -10,9 +10,13 @@ import React, {
 const Weather = React.createClass({
   render: function() {
     return (
-      <MapView style={styles.map}>
+      <MapView style={styles.map}
+        onRegionChangeComplete={this.onRegionChangeComplete}>
       </MapView>
     );
+  },
+  onRegionChangeComplete: function(region) {
+    console.log(region);
   }
 });
 
