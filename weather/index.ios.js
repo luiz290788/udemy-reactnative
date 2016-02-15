@@ -7,6 +7,8 @@ import React, {
   MapView
 } from 'react-native';
 
+import OpenWeather from './src/api.js';
+
 const Weather = React.createClass({
   getInitialState: function() {
     return {
