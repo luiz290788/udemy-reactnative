@@ -15,6 +15,6 @@ export default function openWeather (latitude, longitude) {
       city: _.capitalize(json.name),
       temperature: kelvinToC(json.main.temp),
       description: _.capitalize(json.weather[0].description)
-    }
+    };
   });
 }

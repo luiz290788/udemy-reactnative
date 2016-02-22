@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5fcff'
   },
   textWrapper: {
-    flex: 1,
+    height: 120,
     alignItems: 'center'
   },
   text: {
